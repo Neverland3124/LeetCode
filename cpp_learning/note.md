@@ -16,6 +16,10 @@
         -    used similar as abstract in java
         -    also remember virtual destructure
         -    ~ in cpp is destructure
+-   stl
+    -   vector
+        -   vector<T>
+            -   can use int, double, custom class, and pointer (pointer is weird)
 -   what is objective c
 -   start on the project
 -   some fancy way of using cpp

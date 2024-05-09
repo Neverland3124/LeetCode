@@ -33,5 +33,11 @@ int main() {
         std::cout << *it << " ";
     }
     std::cout << std::endl;
+
+    std::vector<double> vec3 = {1.1, 2.2, 3.3, 4.4, 5.5};
+    for(auto it = vec3.begin(); it != vec3.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
     return 0;
 }

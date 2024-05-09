@@ -13,16 +13,21 @@ using namespace std;
 
 class Solution {
    public:
-    // TODO: what is vector? here it looks like have a generic of int
+    // what is vector? int is a generic type in vector
+    // can use double as well
+    // vector is a dynamic array in C++ STL
     vector<int> twoSum(vector<int> &nums, int target) {
-        // TODO: why pass nums by reference?
-        // Start here
+        // why pass nums by reference?
+        // nums is passed by reference to avoid copying the entire vector
         int n = nums.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (nums[i] + nums[j] == target) {
-                    // TODO: how to return vector of int?
-                    return {i, j};
+                    // how to return vector of int?
+                    // return {i, j};
+                    // both working
+                    std::vector<int> vec = {i, j};
+                    return vec;
                 }
             }
         }
