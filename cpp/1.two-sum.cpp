@@ -13,7 +13,6 @@ using namespace std;
 
 class Solution {
    public:
-    // TODO: what is public, what else do we have?
     // TODO: what is vector? here it looks like have a generic of int
     vector<int> twoSum(vector<int> &nums, int target) {
         // TODO: why pass nums by reference?
