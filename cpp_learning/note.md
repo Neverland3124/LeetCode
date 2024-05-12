@@ -4,6 +4,18 @@
 
 -   difference of c and c++
 -   basic types
+    -   arrays
+        -   int x[] = {1, 2, 3, 4, ...};
+    -   strings
+        -   cstrings
+            -   char str[] = "C++";
+        -   get string functions
+            -   cin >> str
+            -   cin.get(str, 100);
+            -   if use string str; we can use getline(cin, str);
+        -   c++ string class
+            -   find(), rfind() - find the last occur substring, append(), insert(), erase(), replace(), compare()
+        -   
 -   classes
     -   public
     -   **protected**
@@ -20,6 +32,22 @@
     -   vector
         -   vector<T>
             -   can use int, double, custom class, and pointer (pointer is weird)
+-  operaters
+   -  &	Binary AND
+   -  |	Binary OR
+   -  ^	Binary XOR
+   -  ~	Binary One's Complement
+   -  <<	Binary Shift Left
+   -  \>>	Binary Shift Right
+   -  &	represents memory address of the operand	&num; // address of num
+   -  .	accesses members of struct variables or class objects	s1.marks = 92;
+   -  ->	used with pointers to access the class or struct variables	ptr->marks = 92;
+   -  <<	prints the output value	cout << 5;
+   -  \>>	gets the input value	cin >> num;
+-   function
+    -   inline function in cpp
+        -   this will copy the function itself to where the argument are to make running faster
+    -   auto function: can use as function return type and lambda function input parameter type
 -   what is objective c
 -   start on the project
 -   some fancy way of using cpp
