@@ -1,5 +1,5 @@
 # LeetCode
-My LeetCode Path
+My LeetCode Path and C++ language learning
 
 ## Purpose
 - get familiar with algorithms
@@ -9,4 +9,5 @@ My LeetCode Path
 - loops
 - linklist
 - trees
-- xxx
+- dp
+- ...
