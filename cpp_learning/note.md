@@ -204,6 +204,7 @@
         -   A class that contains a pure virtual function is known as an abstract class.
 
 -   cpp stl (C++ Standard Template Library)
+
     -   vector
         -   vector<T>
             -   can use int, double, custom class, and pointer (pointer is weird)
@@ -229,13 +230,23 @@
         -   vector<int> numbers = {3, 2, 5, 1, 4};
         -   vector<int>::iterator itr1 = numbers.begin();
         -   vector<int>::iterator itr2 = numbers.end();
-    -   algorithm
-        -   #include <algorithm>
-        -   sort(numbers.begin(), numbers.end());
     -   set
         -   #include <set>
         -   set<int> numbers = {1, 100, 10, 70, 100};
-        -   numbers are sorted in ascending order with duplicate numbers removed
+        -   property
+            -   numbers are sorted in ascending order with duplicate numbers removed
+            -   unique elements
+            -   immutable (cannot change the value of existing)
+            -   sorted order
+            -   associative (by key not position)
+        -   To get the elements of a set sorted in descending order
+            -   set<int, greater<int>> my_set;
+        -   methods
+            -   insert() Insert elements into a set.
+            -   erase() Delete elements from a set.
+            -   clear() Remove all the elements from a set.
+            -   empty() Check if the set is empty.
+            -   size() Returns the size of the set.
     -   unordered_set
         -   #include <unordered_set>
         -   unordered_set<int> numbers = {1, 100, 10, 70, 100};
@@ -260,9 +271,170 @@
         -   auto found = find(age.begin(), age.end(), 5); // check if the number 5 is present or not
         -   int sum = std::accumulate(age.begin(), age.end(), 0); // get the sum
     -   list
+        -   A doubly linked list
+        -   look like linklist, have two links one to previous, one to next
         -   #include<list>
         -   std::list<Type> list_name = {value1, value2, ...};
+        -   add element
+            -   push_front(), push\_\_back()
+        -   access elements
+            -   front(), back()
+        -   delete
+            -   pop_front(), pop_back()
+            -   reverse() Reverses the order of the elements.
+            -   sort() Sorts the list elements in a particular order.
+            -   unique() Removes consecutive duplicate elements.
+            -   empty() Checks whether the list is empty.
+            -   size() Returns the number of elements in the list.
+            -   clear() Clears all the values from the list
+            -   merge() Merges two sorted lists.
+    -   forward list
+        -   A singly linked list.
+        -   Each element points only to its next element.
+        -   compare
+            -   sequence containers ordered in a strict linear sequence
+            -   add or remove elements anywhere in the sequence with constant time efficiency
+            -   more efficient in insertion, moving, and extracting elements compared to containers like array, vectors, etc
+            -   direct random access is not supported in forward lists
+            -   Does not support push_back and pop_back because it’s singly linked.
+        -   #include <forward_list>
+        -   std::forward_list<data_type> forward_list_name = {value1, value2, value3, ...};
+        -   front() Access the front element.
+        -   push_front() Add an element to the start of the list.
+        -   insert_after() Add an element at the position right after the given position.
+        -   assign() Assign new contents to the list by replacing the current contents.
+        -   pop_front() Remove the element at the front.
+        -   remove() Remove elements with specific values.
+        -   clear() Delete all the contents of the list.
+    -   queue
+        -   FIFO
+        -   #include <queue>
+        -   queue<type> q;
+        -   push() Inserts an element at the back of the queue.
+        -   pop() Removes an element from the front of the queue.
+        -   front() Returns the first element of the queue.
+        -   back() Returns the last element of the queue.
+        -   size() Returns the number of elements in the queue.
+        -   empty() Returns true if the queue is empty.
+    -   deque
+        -   a double-ended queue
+        -   we can insert and remove elements from both the front and rear
+        -   #include <deque>
+        -   deque<type> dq;
+        -   push_back() inserts element at the back
+        -   push_front() inserts element at the front
+        -   pop_back() removes element from the back
+        -   pop_front() removes element from the front
+        -   front() returns the element at the front
+        -   back() returns the element at the back
+        -   at(x) sets/returns the element at specified index
+            -   same as nums[x]
+        -   size() returns the number of elements
+        -   empty() returns true if the deque is empty
+    -   priority queue
+        -   removed on the basis of priority
+        -   priority_queue.cpp
+    -   stack
+        -   LIFO
+        -   #include <stack>
+        -   stack<type> st;
+        -   push() adds an element into the stack
+        -   pop() removes an element from the stack
+        -   top() returns the element at the top of the stack
+        -   size() returns the number of elements in the stack
+        -   empty() returns true if the stack is empty
+    -   map
+        -   #include <map>
+        -   std::map<key_type, value_type> map_name = {{key1, value1},{key2, value2}, ...};
+            -   can also initialize map elements without using the assignment operator =
+            -   std::map<int, string> student = {{1,"Jacqueline"}, {2,"Blake"}, {3,"Denise"}};
+            -   std::map<int, string> student {{1,"Jacqueline"}, {2,"Blake"}, {3,"Denise"}};
+        -   add value
+            -   insert() adds an element (key-value pair) to the map
+            -   std::map<int, string> student;
+            -   use student[x] = "xxx" to add key-value pairs
+            -   or student.insert(std::make_pair(3, "Denise"));
+        -   erase() removes an element or range of elements from the map
+            -   can erase by key or iterator or a range
+            -   student_rank.erase("Rachel");
+            -   student_rank.erase(itr);
+            -   my_map.erase(itr_first, itr_last)
+        -   clear() removes all the elements from the map
+        -   find() searches the map for the given key
+            -   map_name.find(key);
+        -   size() returns the number of elements in the map
+        -   empty() returns true if the map is empty
+        -   iterator
+            -   student[1] = "Jacqueline";
+            -   map<int, string>::iterator iter;
+            -   cout << (\*iter).first << " - "; // Output: 1
+            -   cout << (\*iter).second; // Output: Jacqueline
+    -   multimap
+        -   std::multimap<key_type, value_type> multimap_name = { {key1, value1}, {key2, value2}, ...};
+        -   multimap can have a key have different value
+        -   methods
+            -   insert() inserts one or more key-value pairs
+            -   count() returns total number of occurrences of the specified key
+            -   find() returns the iterator to the element with the specified key
+                -   iterator to the element if the key is found
+                -   iterator to the end of the container (the end() iterator) if the key is not found
+                -   used the find() method to check if the key 27 exists
+                ```cpp
+                if (students.find(27) != students.end()) {
+                    cout << "Yes";
+                }
+                else {
+                    cout << "No";
+                }
+                ```
+            -   size() returns the number of elements
+            -   empty() returns true if the multimap is empty
+            -   erase() removes elements with specified key
+            -   clear() removes all elements
+    -   multiset
+        -   property
+            -   associative (by key not position)
+            -   sorted order
+            -   equivalent keys
+            -   immutable (cannot change the value of existing)
+        -   #include <set>
+        -   std::multiset<data_type> multiset_name = {key1, key2, key3, ...};
+        -   decreasing order: multiset<int, greater<int>> my_multiset ;
+        -   insert, erase, clear, empty, size
+    -   unordered map
+        -   the unordered map is implemented as a hash table data structure whereas the regular map is a binary search tree data structure
+        -   Starting from C++17, you can use structure bindings to simplify this code further:
+            -   for(const auto& [key, value]: unordered_map1) {
+            -             cout << key << " -  " << value << endl;
+            -   }
+        -   insert, count, find, at, size, empty, erase, clear
+    -   unordered_multiset
+    -   unordered_multimap
 
+-   iterators
+    -   notations
+        -   \*itr returns the element at the current position
+        -   itr->m returns the member value m of the object pointed by the iterator and is equivalent to (\*itr).m
+        -   ++itr moves iterator to the next position
+        -   -–itr moves iterator to the previous position
+        -   itr + i moves iterator by i positions
+        -   itr1 == itr2 returns true if the positions pointed by the iterators are the same
+        -   itr1 != itr2 returns true if the positions pointed by the iterators are not the same
+        -   itr = itr1 assigns the position pointed by itr1 to the itr iterator
+    -   input iterator
+        -   istream_iterator<int> input_itr(cin);
+        -   ++ \* -> == !=
+    -   output iterator
+        -   ++ 8 ->
+    -   forward iterator
+        -   for forward_list
+        -   ++ \* -> == !=
+    -   Bidirectional Iterator
+        -   list, set, multiset, map, multimap
+        -   ++ -- \* -> == !=
+    -   Random Access Iterator
+        -   vector, deque, array
+        -   ++ -- \* [] -> + - < <= > >= == !=
 -   operaters
     -   & Binary AND
     -   | Binary OR
@@ -279,6 +451,84 @@
     -   inline function in cpp
         -   this will copy the function itself to where the argument are to make running faster
     -   auto function: can use as function return type and lambda function input parameter type
+-   algorithm
+    -   sort() Sort the elements of the container.
+        -   sort(first, last);
+        -   first - iterator specifying the beginning of the sorting range (inclusive)
+        -   last - iterator specifying the end of the sorting range (exclusive)
+    -   copy() Copy elements within a given range.
+        -   copy(first, last, result);
+        -   first - iterator specifying the beginning of the range to copy (inclusive)
+        -   last - iterator specifying the end of the range to copy (exclusive)
+        -   result - iterator specifying the position in the destination vector where the elements will be copied
+    -   move() Move the given range of elements.
+        -   move(first, last, result);
+    -   swap() Exchange values of two objects.
+        -   swap(x, y);
+    -   merge() Merge sorted ranges.
+        -   merge(first1, last1, first2, last2, result);
+        -   first1, last1 - iterators specifying the first input range.
+        -   first2, last2 - iterators specifying the second input range.
+        -   result - iterator specifying the beginning of the destination range.
+    -   replace() Replace the value of an element.
+        -   replace(first, last, old_value, new_value);
+        -   first, last - iterators specifying the range to transform.
+        -   old_value - value to be replaced.
+        -   new_value - replacement value.
+    -   remove() Remove an element.
+        -   remove(first, last, val);
+        -   first, last - iterators specifying the range to transform
+        -   val - value to be removed
+-   Functor
+    -   overloaded the function call operator ()
+    -   void operator()() {}
+    -   int operator()(int a, int b) { return a + b; }
+    -   C++ Predefined Functors
+        -   #include <functional>
+        -   plus returns the sum of two parameters
+        -   minus returns the difference of two parameters
+        -   multiplies returns the product of two parameters
+        -   divides returns the result after dividing two parameters
+        -   modulus returns the remainder after dividing two parameters
+        -   negate returns the negated value of a parameter
+        -   equal_to returns true if the two parameters are equal
+        -   not_equal_to returns true if the two parameters are not equal
+        -   greater returns true if the first parameter is greater than the second
+        -   greater_equal returns true if the first parameter is greater than or equal to the second
+        -   less returns true if the first parameter is less than the second
+        -   less_equal returns true if the first parameter is less than or equal to the second
+        -   logical_and returns the result of Logical AND operation of two booleans
+        -   logical_or returns the result of Logical OR operation of two booleans
+        -   logical_not returns the result of Logical NOT operation of a boolean
+-   Exception Handling
+    -   try, throw, catch
+    ```cpp
+    try {
+
+        // code that may raise an exception
+        throw argument;
+    }
+
+    catch (exception) {
+        // code to handle exception
+    } 
+    ```
+    -   standard
+        -   std::exception	The parent class of all C++ exceptions.
+        -   std::bad_alloc	Thrown when a dynamic memory allocation fails.
+        -   std::bad_cast	Thrown by C++ when an attempt is made to perform a dynamic_cast to an invalid type.
+        -   std::bad_exception	Typically thrown when an exception is thrown and it cannot be rethrown.
+        -   in exception header file
+-   File Handling
+    -   #include <fstream>
+        -   include two classes ifstream & ofstream
+    -   std::ofstream my_file("example.txt"); 
+    -   std::ofstream my_file.open("example.txt");
+    -   my_file.close();
+    -   
+
+### Objective c
+
 -   what is objective c
--   start on the project
--   some fancy way of using cpp
+    -   is an extension of the C programming language, designed for adding object-oriented capabilities.
+    -   Objective-C uses a dynamic runtime for object-oriented features, while C++ is statically typed.
