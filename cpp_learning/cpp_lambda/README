@@ -1,0 +1,44 @@
+# README
+
+## How to run the codes
+- for linux / mac
+```shell
+# run lambda examples
+$ g++ lambda.cpp -o lambda
+$ ./lambda
+# Expect Result
+The sum of c, d: 7
+The sum of all a, b, c, d: 10
+The sum of all a, b, c, d: 12
+The sum of all a, b, c, d: 11
+The sum of all a, b, c, d: 21
+The sum of all a, b, c, d: 22
+Ascending order: 1 1 3 4 5 9
+Module by 2: 1 1 1 0 1 1
+
+# run map examples
+$ g++ map.cpp -o map
+$ ./map
+# Expect Result
+The result increase list: {2, 3, 4, 5, 6}
+The sum of l1 and l2: {8, 10, 12, 14, 16}
+The sum of l1, l2, l3: {12, 15, 18}
+The sum of l1, l2, l3: {12, 15, 18}
+The subrange sum of l1 and l2: {11, 13, 15, 17, 19}
+
+# run filter examples
+$ g++ filter.cpp -o filter
+$ ./filter
+# Expect Result
+The result filtered list: {4, 5}
+The result filtered list: {93, 24, 888, 99, 21}
+
+# run fold examples
+$ g++ fold.cpp -o fold
+$ ./fold
+# Expect Result
+The result of sum: 15
+The result of res: false
+```
+
+## Actual document in Project.md

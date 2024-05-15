@@ -593,10 +593,11 @@
     - vector<int> destination = move(source);
   - constexpr
     - specify that a variable or function can be evaluated at compile-time
-    - constexpr int square(int x) { return x * x; }
+    - constexpr int square(int x) { return x \* x; }
     - int result = square(5); // computed at compile-time
   - null pointer
-    - int* ptr = nullptr;
+    - int\* ptr = nullptr;
+    - Always prefer nullptr over NULL because of the safety nullptr provides over NULL.
   - class templates / function templates
   - thread support
     - #include <thread>
@@ -604,8 +605,129 @@
     - t.join();
   - Delegating Constructors
     - a constructor may call another constructor of the same class
+    - Complex(int i, int r) : img(i), real(r) {}
+    - Complex() : Complex(0, 0) { }
   - deleted function
+    - prevent certain operations on your class
+      - prevent copy constructor
+        - NonCopyable(const NonCopyable&) = delete; // Disable copy constructor
+        - NonCopyable& operator=(const NonCopyable&) = delete; // Disable copy assignment
+      - prevent dynamic allocation
+        - void\* operator new(size_t) = delete; // Prevent dynamic allocation
+        - void\* operator new[](size_t) = delete; // Prevent array dynamic allocation
+    - My_Class() = delete;
+    - void do_something() = delete;
   - defaulted function
+    - // use the compiler-generated default constructor
+    - Another_Class() = default;
+      - will assign int to 0
+      - string to empty string
+      - array to indeterminate values
+
+- Namespaces
+
+  - naming conflict
+    - int var; double var; // error
+    - int var; { double var; } // working
+  - use namespace keyword
+    - namespace dbl { double var; }
+    - dbl::var
+  - using namespace std;
+    - bypass of using ::
+      - std::cout -> count
+      - std::cin -> cin
+
+- Preprocessors and Macros
+  - #include <iostream>
+  - all preprocessor directives begin with the # symbol.
+    - For example, #include, #define, #if, and so on.
+    - #include - to include header files
+    - #define - to define macros
+    - #if - to provide conditional compilation
+  - #include <cmath>
+    - The #include directive tells the preprocessor to replace the above line of code with the contents of the cmath header file.
+      - then pow() / sqrt() can be used
+  - #include "path_to_file/my_header.h"
+    - for custom header file
+  - #define
+    - #define PI 3.1415 // value of pi
+    - PI is known as a macro
+    - function like macros
+      - #define circleArea(r) (3.1415 _ r _ r)
+  - #if
+    - The if...else statements are tested during execution time to check if the block of code should be executed or not.
+    - On the other hand, conditional directives are tested by the preprocessor before compilation to decide whether to include a block of code in the program or not.
+    - #if (x > 0)
+    - #else
+    - #endif
+    - reason
+      - platform code
+        - #ifdef \_WIN32
+          - \_WIN32 - a macro defined by the Microsoft Visual C++ compiler on Windows platforms
+        - #elif \_\_linux\_\_
+          - \_\_linux\_\_ - a macro defined by GNU C Compiler on Linux systems
+        - #else
+        - #endif
+      - debugging code
+      - toggle feature of
+      - ...
+  - predefined macros
+    - \_\_DATE\_\_ A string containing the current date.
+    - \_\_FILE\_\_ A string containing the file name of the currently executing program.
+    - \_\_LINE\_\_ An integer representing the current line number.
+    - \_\_TIME\_\_ A string containing the current time (GMT).\
+    - don't need to redefine them
+- Storage Class
+  - local variable
+  - global variable
+  - static local variable
+    - static float a;
+    - exists only inside a function where it is declared (similar to a local variable)
+    - but its lifetime starts when the function is called and ends only when the **program** ends.
+  - register variable (Deprecated in C++11)
+  - thread local storage
+    - Keyword thread_local
+- Bitwise Operators
+  - a & b;
+  - a | b;
+  - & Bitwise AND Operator
+  - | Bitwise OR Operator
+  - ^ Bitwise XOR Operator
+  - ~ Bitwise Complement Operator
+  - << Bitwise Shift Left Operator
+  - > >     Bitwise Shift Right Operator
+  - Bitwise operators can only be used alongside **char** and **int** data types.
+  - https://www.programiz.com/cpp-programming/bitwise-operators
+- Assert
+  - #include <cassert>
+  - assert(expression);
+  - 0 (false) - the assert prints a message and terminates the program
+  - 1 (true) - does nothing and continues normal execution of the program
+  - disable assert
+    - #define NDEBUG
+    - #include <cassert>
+  - Static Assert
+    - assert macro used for runtime
+    - used for assertion at compile time
+    - static_assert(const_boolean_expression, message);
+    - static_assert(sizeof(int) >= 4, "Size of integer must be greater than or equal to 4 bytes");
+  - When to use
+    - unreachable codes
+    - document code
+      - if (i % 2 == 0) {...}
+      - else { assert(i % 2 == 1); ...}
+  - when not to use
+    - check public functions that may provided by user
+      - should use try catch throw
+    - evaluate expression that affect the program
+      - assert(--n && n % 2 == 0); // this will change n
+- Buffers
+  - Instead of reading or writing data one byte at a time (which can be slow), you can work with larger chunks of data stored in a buffer.
+  - char \*buffer = new char buffer_name[buffer_size]
+  - stream buffers
+  - file buffers
+  - character buffers
+  - custom buffers
 
 ### Objective c
 
