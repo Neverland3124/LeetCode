@@ -12,9 +12,10 @@ using namespace std;
 // class Solution {
 // public:
 //     auto longestPalindrome(string s) {
-//         // Idea: every palindrome has a center, for every index we expend it to find the longest
-//         palindrome
-//         // then we find the max palindrome for all indexes, so we got the result
+//         // Idea: every palindrome has a center, for every index we expend it
+//         to find the longest palindrome
+//         // then we find the max palindrome for all indexes, so we got the
+//         result
 //         // handle edge case
 //         if (s.length() <= 1) {
 //             return s;
@@ -22,8 +23,9 @@ using namespace std;
 
 //         // auto helper function
 //         // captures: [&] - capture all variables by reference (read-write)
-//         // this function given a left and right, expand from center to find the longest
-//         palindrome auto expand_from_center = [&](int left, int right) {
+//         // this function given a left and right, expand from center to find
+//         the longest palindrome auto expand_from_center = [&](int left, int
+//         right) {
 //             while (left >= 0 && right < s.length() && s[left] == s[right]) {
 //                 left--;
 //                 right++;
