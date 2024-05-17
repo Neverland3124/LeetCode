@@ -31,7 +31,8 @@ class Solution {
    public:
     bool isPalindrome(int x) {
         if (x < 0) return false;
-        // TODO: why need handle this special case?
+        // handle this because (x == reversed / 10), if x is 0 and reverse is 1,
+        // 1/10 = 0 still true
         if (x % 10 == 0 && x != 0) return false;
 
         // Second Idea: Reverse only half of the number and compare it with the
