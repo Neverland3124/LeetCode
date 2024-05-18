@@ -16,6 +16,7 @@ My LeetCode Path and C++ language learning
   1. state the subproblem to solve
   2. solving the original problem by subproblems
   3. recursive formula to computer the subproblem
+  - 1D array or 2D array both possible
 - vector use
   - string manipulation
   - integer / string change
@@ -27,3 +28,6 @@ My LeetCode Path and C++ language learning
   - palindrome
 - binary search
   - find mid and update low / high
+- divide and conquer
+  - calculate some thing about this case
+  - then call max/min of three cases (left, this, right)
