@@ -18,11 +18,14 @@ class Solution {
         int result = -1;
 
         while (left <= right) {
+            // If even return the left one
             int mid = (left + right) / 2;
             if (nums[mid] == target) {
                 result = mid;
                 break;
-            } else if (nums[mid] < target) {
+            }
+
+            if (nums[mid] < target) {
                 left = mid + 1;
             } else {
                 right = mid - 1;

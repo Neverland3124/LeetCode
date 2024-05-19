@@ -32,6 +32,9 @@ My LeetCode Path and C++ language learning
   - palindrome
 - binary search
   - find mid and update low / high
+  - try more use <= since = is most time handled seperately in next loop
+  - try one some base case like 1/2/3 element as input
+  - rotated sorted array have a part of the array sorted
 - divide and conquer
   - calculate some thing about this case
   - then call max/min of three cases (left, this, right)
