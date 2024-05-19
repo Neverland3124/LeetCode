@@ -728,7 +728,11 @@
   - file buffers
   - character buffers
   - custom buffers
-
+- ... in cpp
+  - TODO: add this
+  - https://www.bilibili.com/list/watchlater?bvid=BV1KC4y1S7gX&oid=790875156
+  - use auto...a
+  - and call with a list of parameters
 ### Objective c
 
 - what is objective c
