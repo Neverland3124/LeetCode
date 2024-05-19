@@ -36,7 +36,8 @@ My LeetCode Path and C++ language learning
   - calculate some thing about this case
   - then call max/min of three cases (left, this, right)
 - priority queue
-  - use as heap to get the min/max
+  - implemented using a heap to get the min/max
   - default is max, if want min need
   - priority_queue<int, vector<int>, greater<int>> heap;
     - std::priority_queue<int, std::vector<int>, std::greater<int>> heap;
+    - push, pop, top

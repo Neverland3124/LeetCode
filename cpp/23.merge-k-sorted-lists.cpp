@@ -20,13 +20,13 @@
 #include <queue>
 using namespace std;
 
-// struct ListNode {
-//     int val;
-//     ListNode* next;
-//     ListNode() : val(0), next(nullptr) {}
-//     ListNode(int x) : val(x), next(nullptr) {}
-//     ListNode(int x, ListNode* next) : val(x), next(next) {}
-// };
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode* next) : val(x), next(next) {}
+};
 
 class Solution {
    public:
@@ -40,9 +40,15 @@ class Solution {
         priority_queue<int, vector<int>, greater<int>> heap;
 
         // Push all elements to heap
-        // TODO: review this for loop
-        for(auto list : lists) {
-            while(list) {
+        // same as below
+        // for(auto list : lists) {
+        //     while(list) {
+        //         heap.push(list->val);
+        //         list = list->next;
+        //     }
+        // }
+        for (ListNode* list: lists) {
+            while(list != nullptr) {
                 heap.push(list->val);
                 list = list->next;
             }
@@ -53,7 +59,8 @@ class Solution {
         ListNode* headNode = mergedList;
 
         // Pop all elements from heap and create a new list
-        // TODO: review heap functions
+        // priority_queue<int, vector<int>, greater<int>> heap;
+        // heap.top() heap.pop() heap.push()
         while(!heap.empty()) {
             headNode->next = new ListNode(heap.top());
             heap.pop();

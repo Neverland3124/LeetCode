@@ -729,10 +729,19 @@
   - character buffers
   - custom buffers
 - ... in cpp
-  - TODO: add this
-  - https://www.bilibili.com/list/watchlater?bvid=BV1KC4y1S7gX&oid=790875156
-  - use auto...a
-  - and call with a list of parameters
+  - Variadic arguments
+    - int printx(const char\* fmt...);
+    - int printx(const char\* fmt, ...); // same as above (extraneous comma is allowed for C compatibility)
+    - // may be called with one or more arguments:
+    - va_start(args, other_variables)
+      - va_arg(args, arg_type);
+    - va_end(args)
+  - Variadic Templates
+    - in function (auto...a) which can take a list of arguments as parameter
+    - or use template
+      - template<typename... Args>
+      - void print(Args... args) {}
+
 ### Objective c
 
 - what is objective c
