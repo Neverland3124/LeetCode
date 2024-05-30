@@ -14,7 +14,10 @@ class Solution {
     bool search(vector<int>& nums, int target) {
         // Question: why the distinct version not working for the non-distinct version?
         // [1,0,1,1,1] try to find 0, expected: true, output: false with original method
-        // Note:
+
+        // Solution: Need to handle the special case of head = mid = tail
+        //  in this case, both head and tail cannot be the target, so we can safely move head and
+        //  tail to the next position
         int left = 0;
         int right = nums.size() - 1;
         bool result = false;
@@ -24,6 +27,13 @@ class Solution {
             if (nums[mid] == target) {
                 result = true;
                 break;
+            }
+
+            if (nums[left] == nums[mid] && nums[mid] == nums[right]) {
+                // special case
+                left++;
+                right--;
+                continue;
             }
 
             if (nums[left] <= nums[mid]) {

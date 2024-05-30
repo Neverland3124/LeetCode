@@ -9,8 +9,7 @@ My LeetCode Path and C++ language learning
 
 ## Focus Topics
 
-- loops
-  -
+- ## loops
 - linklist
   - how it different from c as have new
   - nullptr use
@@ -44,3 +43,8 @@ My LeetCode Path and C++ language learning
   - priority_queue<int, vector<int>, greater<int>> heap;
     - std::priority_queue<int, std::vector<int>, std::greater<int>> heap;
     - push, pop, top
+- backtrack problems
+  - **Use the for loop approach** if the problem involves combinations, permutations, or if there is a need to manage **duplicates** within the loop. It often results in more concise and efficient code.
+    - for loop with each loop call backtrack once
+  - **Use the include/exclude approach** if you want to explicitly model the decision process in your recursion, or if the problem naturally fits into a binary decision tree.
+    - call backtrack twice once exclude the element, once include
