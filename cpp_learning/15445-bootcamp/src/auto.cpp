@@ -105,6 +105,7 @@ int main() {
   std::cout << std::endl;
 
   std::cout << "Printing elements in map with auto...\n";
+  // Note: auto it have the type std::unordered_map<std::string, int>::iterator
   for (auto it = map.begin(); it != map.end(); ++it) {
     std::cout << "(" << it->first << "," << it->second << ")"
               << " ";
