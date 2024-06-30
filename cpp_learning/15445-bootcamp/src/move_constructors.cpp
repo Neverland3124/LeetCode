@@ -35,7 +35,7 @@
 // creating more than one instance of this class, without proper handling, can
 // result in double deletion or memory leaks.
 class Person {
-public:
+ public:
   Person() : age_(0), nicknames_({}), valid_(true) {}
 
   // Keep in mind that this constructor takes in a std::vector<std::string>
@@ -54,9 +54,7 @@ public:
   // significant copying cost. Generally, for numeric types, it's okay to copy
   // them, but for other types, such as strings and object types, one should
   // move the class instance unless copying is necessary.
-  Person(Person &&person)
-      : age_(person.age_), nicknames_(std::move(person.nicknames_)),
-        valid_(true) {
+  Person(Person &&person) : age_(person.age_), nicknames_(std::move(person.nicknames_)), valid_(true) {
     std::cout << "Calling the move constructor for class Person.\n";
     // The moved object's validity tag is set to false.
     person.valid_ = false;
@@ -78,6 +76,9 @@ public:
   // so this class cannot be copy-constructed.
   Person(const Person &) = delete;
   Person &operator=(const Person &) = delete;
+  // Note: difference between use const Person & deleted and the original one
+  // Example of what is not allowed: Person person1; Person person2 = person1;
+  // Example of what is not allowed: Person person1; Person person2; person2 = person1;
 
   uint32_t GetAge() { return age_; }
 
@@ -95,7 +96,7 @@ public:
     }
   }
 
-private:
+ private:
   uint32_t age_;
   std::vector<std::string> nicknames_;
   // Keeping track of whether an object's data is valid, i.e. whether
@@ -115,12 +116,13 @@ int main() {
   // std::move in a couple ways. This method calls the move assignment operator.
   Person andy1;
   andy1 = std::move(andy);
+  // move will turn a lvalue to a rvalue, then it will call Person &operator=(Person &&other)
 
   // Note that andy1 is valid, while andy is not a valid object.
   std::cout << "Printing andy1's validity: ";
-  andy1.PrintValid();
+  andy1.PrintValid();  // valid
   std::cout << "Printing andy's validity: ";
-  andy.PrintValid();
+  andy.PrintValid();  // invalid because it has been moved
 
   // This method calls the move constructor. After this operation, the contents
   // of the original andy object have moved to andy1, then moved to andy2. The
@@ -130,21 +132,24 @@ int main() {
 
   // Note that andy2 is valid, while andy1 is not a valid object.
   std::cout << "Printing andy2's validity: ";
-  andy2.PrintValid();
+  andy2.PrintValid();  // valid
   std::cout << "Printing andy1's validity: ";
-  andy1.PrintValid();
+  andy1.PrintValid();  // invalid
 
-  // However, note that because the copy assignment operator is deleted, this code 
+  // However, note that because the copy assignment operator is deleted, this code
   // will not compile. The first line of this code constructs a new object via the
   // default constructor, and the second line invokes the copy assignment operator
   // to re-initialize andy3 with the deep-copied contents of andy2. Try uncommenting
   // these lines of code to see the resulting compiler errors.
   // Person andy3;
   // andy3 = andy2;
+  // function "Person::operator=(const Person &)" (declared at line 78) cannot be referenced -- it is a deleted function
+  // andy2 here is a lvalue, it will try call Person &operator=(const Person &) = delete
 
   // Because the copy constructor is deleted, this code will not compile. Try
   // uncommenting this code to see the resulting compiler errors.
   // Person andy4(andy2);
+  // andy 2 is a lvalue as well, it will try call Person(const Person &) = delete;
 
   return 0;
 }

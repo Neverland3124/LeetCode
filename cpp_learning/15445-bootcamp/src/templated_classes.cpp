@@ -10,78 +10,73 @@
 // Templates can be also used to implement classes. For instance, here is a
 // basic templated class that stores one element of a templated type and
 // prints it when the print function is called.
-template<typename T>
+template <typename T>
 class Foo {
-  public:
-    Foo(T var) : var_(var) {}
-    void print() {
-      std::cout << var_ << std::endl;
-    }
-  private:
-    T var_;
+ public:
+  Foo(T var) : var_(var) {}
+  void print() { std::cout << var_ << std::endl; }
+
+ private:
+  T var_;
 };
 
-// You can also pass in multiple type names via templates into classes. 
+// Notes: the above may not be printable, need use interface to limit the type of non-printable type
+
+// You can also pass in multiple type names via templates into classes.
 // For instance, here's another basic templated class that stores two
 // elements of a templated type and prints them when the print function
 // is called.
-template<typename T, typename U> 
+template <typename T, typename U>
 class Foo2 {
-  public:
-    Foo2(T var1, U var2) 
-      : var1_(var1)
-      , var2_(var2) {}
-    void print() {
-      std::cout << var1_ << " and " << var2_ << std::endl;
-    }
-  private:
-    T var1_;
-    U var2_;
+ public:
+  Foo2(T var1, U var2) : var1_(var1), var2_(var2) {}
+  void print() { std::cout << var1_ << " and " << var2_ << std::endl; }
+
+ private:
+  T var1_;
+  U var2_;
 };
 
 // It is also possible to create specialized templated classes, that do
 // different things for different types. Take the following contrived example,
 // which instantiates a class with a print function that outputs the value of
-// the variable stored if it's any other type but float. If the class is 
+// the variable stored if it's any other type but float. If the class is
 // instantiated with a float type, it prints out hello float and the variable
 // the class stores in its var_ field.
-template<typename T>
+template <typename T>
 class FooSpecial {
-  public:
-    FooSpecial(T var) : var_(var) {}
-    void print() {
-      std::cout << var_ << std::endl;
-    }
-  private:
-    T var_;
+ public:
+  FooSpecial(T var) : var_(var) {}
+  void print() { std::cout << var_ << std::endl; }
+
+ private:
+  T var_;
 };
 
 // Specialized templated class, specialized on the float type.
-template<>
+template <>
 class FooSpecial<float> {
-  public:
-    FooSpecial(float var) : var_(var) {}
-    void print() {
-      std::cout << "hello float! " << var_ << std::endl;
-    }
-  private:
-    float var_;
+ public:
+  FooSpecial(float var) : var_(var) {}
+  void print() { std::cout << "hello float! " << var_ << std::endl; }
+
+ private:
+  float var_;
 };
 
 // Template parameters don't have to be types. They can also be values!
-template<int T>
+template <int T>
+// Each instantiation of Bar is parameterized with an integer value, not a type.
 class Bar {
-  public: 
-    Bar() {}
-    void print_int() {
-      std::cout << "print int: " << T << std::endl;
-    }
+ public:
+  Bar() {}
+  void print_int() { std::cout << "print int: " << T << std::endl; }
 };
 
 int main() {
   // First, let us construct an object from a templated class. The Foo
   // class template is instantiated with an int template argument. This
-  // would make a's type class Foo<int> instead of Foo. a's print 
+  // would make a's type class Foo<int> instead of Foo. a's print
   // function works as expected.
   Foo<int> a(3);
   std::cout << "Calling print on Foo<int> a(3): ";
@@ -89,7 +84,7 @@ int main() {
 
   // It is also possible for a templated class to interpret the type
   // of its arguments. Once again, if you're a beginner, think twice
-  // before doing this if you are unsure of the types you are 
+  // before doing this if you are unsure of the types you are
   // instantiating your class with.
   Foo b(3.4f);
   std::cout << "Calling print on Foo b(3.4f): ";
@@ -117,6 +112,9 @@ int main() {
   // Lastly, let's see what happens when we construct an object from a
   // templated class with non-type arguments.
   Bar<150> f;
+  // create a unique type Bar<150>
+  // Using a template with a non-type parameter like Bar<150> allows the compiler to know the exact value
+  // during compilation, potentially enabling further optimizations.
   std::cout << "Calling print_int on Bar<150> f: ";
   f.print_int();
 

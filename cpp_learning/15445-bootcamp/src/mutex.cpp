@@ -40,6 +40,7 @@ int main() {
   std::thread t2(add_count);
   t1.join();
   t2.join();
+  // after two threads increment the count, the count should be 2.
 
   std::cout << "Printing count: " << count << std::endl;
   return 0;

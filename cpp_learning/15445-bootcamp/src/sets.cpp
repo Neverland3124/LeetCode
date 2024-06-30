@@ -38,6 +38,9 @@ int main() {
 
   for (int i = 6; i <= 10; ++i) {
     int_set.emplace(i);
+    // Notes:
+    // constructs the element directly in the place
+    // for simple one like int, it's the same as insert
   }
 
   // To find an element, we can use the find function, which returns an
@@ -48,6 +51,7 @@ int main() {
   // imply that the element does not exist.
   std::set<int>::iterator search = int_set.find(2);
   if (search != int_set.end()) {
+    // end() is the past-the-end iterator, not the last element.
     std::cout << "Element 2 is in int_set.\n";
   }
 
@@ -76,6 +80,7 @@ int main() {
   // first element from the set. We can pass in an iterator that points to the
   // first element from the set to the erase function.
   int_set.erase(int_set.begin());
+  // the set is ordered so the first element is the smallest
 
   // We confirm that 1 isn't in the set anymore.
   if (int_set.count(1) == 0) {
@@ -86,6 +91,8 @@ int main() {
   // the erase function. For instance, if we want to erase elements that are
   // greater than or equal to 9 (so, 9 and 10), we call the following.
   int_set.erase(int_set.find(9), int_set.end());
+  // inline std::set<int>::iterator std::set<int>::erase(std::set<int>::const_iterator __first,
+  // std::set<int>::const_iterator __last) it's in order, so what's after 9 is bigger than 9
 
   // We confirm that 9 and 10 aren't in the set anymore.
   if (int_set.count(9) == 0 && int_set.count(10) == 0) {
@@ -95,8 +102,13 @@ int main() {
   // We can iterate through the set elements via the set iterator. You cannot
   // iterate through a set via indexes of any kind.
   std::cout << "Printing the elements of the iterator:\n";
-  for (std::set<int>::iterator it = int_set.begin(); it != int_set.end();
-       ++it) {
+  // iterator loop over int_set
+  for (std::set<int>::iterator it = int_set.begin(); it != int_set.end(); ++it) {
+    // We can access the element itself by dereferencing the iterator.
+    std::cout << *it << " ";
+  }
+  std::cout << "\n";
+  for (std::set<int>::iterator it = int_set.begin(); it != int_set.end(); it++) {
     // We can access the element itself by dereferencing the iterator.
     std::cout << *it << " ";
   }
@@ -106,6 +118,7 @@ int main() {
   // loop.
   std::cout << "Printing the elements of the iterator with a for-each loop:\n";
   for (const int &elem : int_set) {
+    // this const type &param is a way to make sure the element is not modified and don't copy the element
     std::cout << elem << " ";
   }
   std::cout << "\n";

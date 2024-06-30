@@ -23,6 +23,7 @@ int main() {
   // the single ampersand syntax.
   int a = 10;
   int &b = a;
+  // Notes: b has type int reference, a and b refer to the same data in memory.
 
   // As stated, if we try to print b, we will get 10.
   std::cout << "b is " << b << std::endl;
@@ -32,7 +33,9 @@ int main() {
   // on a, since a is being taken as a reference, then a's value in the caller
   // context will change value.
   add_three(a);
+  // Both a and b will now be 13.
   std::cout << "a is " << a << std::endl;
+  std::cout << "b is " << b << std::endl;
 
   return 0;
 }

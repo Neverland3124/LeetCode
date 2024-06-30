@@ -54,6 +54,7 @@ int main() {
   std::cout << "Printing add<int>(3, 5): " << add<int>(3, 5) << std::endl;
   std::cout << "Printing add<float>(2.8, 3.7): " << add<float>(2.8, 3.7)
             << std::endl;
+  // add<typename>(x, y)
 
   // It is also possible for a templated function to interpret the type of its
   // arguments, although if you're a beginner in modern C++, it's preferred you

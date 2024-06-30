@@ -59,22 +59,25 @@ int main() {
   std::unordered_map<std::string, int>::iterator result = map.find("jignesh");
   if (result != map.end()) {
     // This is one way of accessing the key/value pair from the iterator.
-    std::cout << "Found key " << result->first << " with value "
-              << result->second << std::endl;
+    // here result is an iterator pointer, so we need to use -> to access the value
+    std::cout << "Found key " << result->first << " with value " << result->second << std::endl;
 
     // Dereferencing the iterator is another method of accessing the key/value
     // pair from the iterator.
+    // If we dereference the iterator, we get a std::pair object.
+    // When dereferencing an iterator of a std::unordered_map (or map), the type you get is always a std::pair<const
+    // KeyType, ValueType>
+
     std::pair<std::string, int> pair = *result;
-    std::cout << "DEREF: Found key " << pair.first << " with value "
-              << pair.second << std::endl;
+    // auto pair = *result;
+    std::cout << "DEREF: Found key " << pair.first << " with value " << pair.second << std::endl;
   }
 
   // The count function returns the number of elements in an unordered map with
   // the specified key in the unordered map.
   size_t count = map.count("spam");
   if (count == 1) {
-    std::cout
-        << "A key-value pair with key spam exists in the unordered map.\n";
+    std::cout << "A key-value pair with key spam exists in the unordered map.\n";
   }
 
   // The erase function deletes values from the unordered map. It can take a
@@ -104,8 +107,7 @@ int main() {
   // iterator. You cannot iterate through a unordered map via indexes of any
   // kind.
   std::cout << "Printing the elements of the iterator:\n";
-  for (std::unordered_map<std::string, int>::iterator it = map.begin();
-       it != map.end(); ++it) {
+  for (std::unordered_map<std::string, int>::iterator it = map.begin(); it != map.end(); ++it) {
     // We can access the element itself by dereferencing the iterator.
     std::cout << "(" << it->first << ", " << it->second << "), ";
   }

@@ -6,11 +6,13 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+filename="${1%.cpp}"
+
 # Compile the C++ file
-g++ $1.cpp -o $1.o
+g++ "${filename}.cpp" -o "${filename}.o"
 
 # Run the executable
-./$1.o
+./"${filename}.o"
 
 # Clean up the object file
-rm -f $1.o
+rm -f "${filename}.o"

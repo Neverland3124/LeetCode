@@ -27,8 +27,11 @@ void add_count() {
   // The constructor of std::scoped_lock allows for the thread to acquire the
   // mutex m.
   std::scoped_lock slk(m);
+  // Below unique_lock can have the same effect as scoped_lock.
+  // std::unique_lock slk(m);
   count += 1;
 
+  // Note: so the scoped lock is a RAII-style object, it will be destructed when the function add_count finishes.
   // Once the function add_count finishes, the object slk is out of scope, and
   // in its destructor, the mutex m is released.
 }

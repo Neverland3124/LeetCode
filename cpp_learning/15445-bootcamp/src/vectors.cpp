@@ -28,24 +28,18 @@
 
 // Basic point class. (Will use later)
 class Point {
-public:
-  Point() : x_(0), y_(0) {
-    std::cout << "Default constructor for the Point class is called.\n";
-  }
+ public:
+  Point() : x_(0), y_(0) { std::cout << "Default constructor for the Point class is called.\n"; }
 
-  Point(int x, int y) : x_(x), y_(y) {
-    std::cout << "Custom constructor for the Point class is called.\n";
-  }
+  Point(int x, int y) : x_(x), y_(y) { std::cout << "Custom constructor for the Point class is called.\n"; }
 
   inline int GetX() const { return x_; }
   inline int GetY() const { return y_; }
   inline void SetX(int x) { x_ = x; }
   inline void SetY(int y) { y_ = y; }
-  void PrintPoint() const {
-    std::cout << "Point value is (" << x_ << ", " << y_ << ")\n";
-  }
+  void PrintPoint() const { std::cout << "Point value is (" << x_ << ", " << y_ << ")\n"; }
 
-private:
+ private:
   int x_;
   int y_;
 };
@@ -76,6 +70,8 @@ int main() {
   std::cout << "Appending to the point_vector via push_back:\n";
   point_vector.push_back(Point(35, 36));
   std::cout << "Appending to the point_vector via emplace_back:\n";
+  // 37 and 38 are the argument to construct the Point object, emplace directly forwards them to the constructor instead
+  // of create object then push
   point_vector.emplace_back(37, 38);
 
   // Let's just add more items to the back of our point_vector.
@@ -86,6 +82,7 @@ int main() {
   // iterate through it's indices via the following for loop. Note that it is
   // good practice to use an unsigned int type for array or vector indexes.
   std::cout << "Printing the items in point_vector:\n";
+  // since i start from 0, we use size_t to avoid negative index
   for (size_t i = 0; i < point_vector.size(); ++i) {
     point_vector[i].PrintPoint();
   }
@@ -104,6 +101,10 @@ int main() {
     item.PrintPoint();
   }
 
+  // for (const auto &item : point_vector) {
+  //   item.PrintPoint();
+  // }
+
   // Now, we show how to erase elements from a vector. First, we can erase
   // elements by their position via the erase function. For instance, if we want
   // to delete int_vector[2], we can call the following function with the
@@ -112,12 +113,17 @@ int main() {
   // is an object that points to an element within the container. For instance,
   // int_vector.begin() is an iterator object that points to the first element
   // in the vector. The vector iterator also has a plus operator that takes
-  // a vector iterator and an integer. The plus operator will increase the 
+  // a vector iterator and an integer. The plus operator will increase the
   // index of the element that the iterator is pointing to by the number passed
   // in. Therefore, int_vector.begin() + 2 is pointing to the third element in
   // the vector, or the element at int_vector[2].
   // If you are confused about iterators, it may be helpful to read the header of
   // iterator.cpp.
+
+  // begin: Returns a read/write iterator that points to the first element in the %vector.  Iteration is done in
+  // ordinary element order.
+  // plus operator will pointing to the xx (third here) element in the vector
+
   int_vector.erase(int_vector.begin() + 2);
   std::cout << "Printing the elements of int_vector after erasing "
                "int_vector[2] (which is 2)\n";
@@ -128,9 +134,13 @@ int main() {
   // do so the following. Note that int_vector.end() is an iterator pointing to
   // the end of the vector. It does not point to the last valid index of the
   // vector. It points to the end of a vector and cannot be accessed for data.
-  int_vector.erase(int_vector.begin() + 1, int_vector.end());
-  std::cout << "Printing the elements of int_vector after erasing all elements "
-               "from index 1 through the end\n";
+
+  // erase range, from 1 to the end
+  // half-open, meaning it includes the first element but excludes the last element.
+  int_vector.erase(int_vector.begin() + 1, int_vector.begin() + 3);  // 1 and 2 are erased
+  // std::cout << "Printing the elements of int_vector after erasing all elements "
+  //  "from index 1 through the end\n";
+  std::cout << "Printing the elements of int_vector after erasing\n";
   print_int_vector(int_vector);
 
   // We can also erase values via filtering, i.e. erasing values if they meet a
@@ -144,7 +154,7 @@ int main() {
   // to the beginning and the end of a vector respectively. Therefore, when we
   // pass these in, we are implying that we want the whole vector filtered.
   // The third argument is a conditional lambda type (see the std::function
-  // library in C++, or at 
+  // library in C++, or at
   // https://en.cppreference.com/w/cpp/utility/functional/function), that takes
   // in one argument, which is supposed to represent each element in the vector
   // that we are filtering. This function should return a boolean that is true
@@ -156,8 +166,7 @@ int main() {
   // remove_if has partitioned away to be deleted, up to the end of the vector.
   // This outer erase takes a range argument, as we saw in the previous example.
   point_vector.erase(
-      std::remove_if(point_vector.begin(), point_vector.end(),
-                     [](const Point &point) { return point.GetX() == 37; }),
+      std::remove_if(point_vector.begin(), point_vector.end(), [](const Point &point) { return point.GetX() == 37; }),
       point_vector.end());
 
   // After calling remove here, we should see that three elements remain in our

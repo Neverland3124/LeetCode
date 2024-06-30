@@ -104,6 +104,7 @@ namespace C {
 // below this line of code. In main, we will see that B::foo can be referred to
 // by B::foo and by foo.
 using namespace B;
+// foo() and B::foo() are now the same function.
 
 // Another use of the using keyword is to bring certain members of a namespace
 // into the current scope. This statement will bring C::eggs into the current

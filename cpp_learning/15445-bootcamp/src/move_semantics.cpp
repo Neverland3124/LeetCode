@@ -25,6 +25,7 @@
 
 // Includes std::cout (printing) for demo purposes.
 #include <iostream>
+// Note: std::move from utility header
 // Includes the utility header for std::move.
 #include <utility>
 // Includes the header for std::vector. We'll cover vectors more in
@@ -38,9 +39,12 @@
 // It seizes ownership of the vector passed in, appends 3 to
 // the back of it, and prints the values in the vector.
 void move_add_three_and_print(std::vector<int> &&vec) {
+  // take an input of rvalue, move it to lvalue vec1 and add 3 to the back
   std::vector<int> vec1 = std::move(vec);
   vec1.push_back(3);
   for (const int &item : vec1) {
+    // this use a reference to avoid copying the value
+    // and use const to avoid modifying the value
     std::cout << item << " ";
   }
   std::cout << "\n";
@@ -52,6 +56,7 @@ void move_add_three_and_print(std::vector<int> &&vec) {
 // ownership of the vector. Therefore, the argument passed in would
 // still be usable in the callee context.
 void add_three_and_print(std::vector<int> &&vec) {
+  // This does not move the input rvalue to a lvalue, so it is usable after the function call
   vec.push_back(3);
   for (const int &item : vec) {
     std::cout << item << " ";
@@ -75,6 +80,7 @@ int main() {
   // to a lvalue. Calling std::move on a lvalue (such as stealing_ints) will
   // result in the expression being cast to a rvalue reference.
   std::vector<int> &&rvalue_stealing_ints = std::move(stealing_ints);
+  // stealing_ints is originally a lvalue, but after std::move, it is now a rvalue.
 
   // However, note that after this, it is still possible to access the data in
   // stealing_ints, since that is the lvalue that owns the data, not
@@ -89,10 +95,14 @@ int main() {
   std::vector<int> int_array2 = {1, 2, 3, 4};
   std::cout << "Calling move_add_three_and_print...\n";
   move_add_three_and_print(std::move(int_array2));
+  // int_array2 is no longer usable after the function call
+  // it had been moved to vec1, which is in the function scope
 
   // It would be unwise to try to do anything with int_array2 here. Uncomment
   // the code to try it out! (On my machine, this segfaults...) NOTE: THIS MIGHT
-  // WORK FOR YOU. THIS DOES NOT MEAN THAT THIS IS WISE TO DO! 
+  // WORK FOR YOU. THIS DOES NOT MEAN THAT THIS IS WISE TO DO!
+  // ./compile.sh: line 13: 14534 Segmentation fault      (core dumped) ./$1.o
+  // Note: int_array2 has been moved, so we should not access it here.
   // std::cout << int_array2[1] << std::endl;
 
   // If we don't move the lvalue in the caller context to any lvalue in the
@@ -101,10 +111,20 @@ int main() {
   // vector data.
   std::vector<int> int_array3 = {1, 2, 3, 4};
   std::cout << "Calling add_three_and_print...\n";
+  for (const int &item : int_array3) {
+    std::cout << item << " ";  // 1 2 3 4
+  }
+  std::cout << "\n";
+  // int_array3 is still usable after the function call
   add_three_and_print(std::move(int_array3));
+  // add_three_and_print(int_array3); // an rvalue reference cannot be bound to an lvalue
 
   // As seen here, we can print from this array.
   std::cout << "Printing from int_array3: " << int_array3[1] << std::endl;
+  for (const int &item : int_array3) {
+    std::cout << item << " ";  // 1 2 3 4 3
+  }
+  std::cout << "\n";
 
   return 0;
 }

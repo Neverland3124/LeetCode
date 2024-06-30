@@ -38,6 +38,7 @@ std::shared_mutex m;
 // read only, shared access to the count variable, and reads the count
 // variable.
 void read_value() {
+  // shared_lock allows multiple threads to use
   std::shared_lock lk(m);
   std::cout << "Reading value " + std::to_string(count) + "\n" << std::flush;
 }
@@ -45,8 +46,10 @@ void read_value() {
 // This function uses a std::unique_lock (write lock equivalent) to gain
 // exclusive access to the count variable and write to the value.
 void write_value() {
+  // unique_lock only allows one thread to use
   std::unique_lock lk(m);
   count += 3;
+  std::cout << "After writing value " + std::to_string(count) + "\n" << std::flush;
 }
 
 // The main method constructs six thread objects and has two of them run the
